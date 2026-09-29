@@ -34,6 +34,8 @@ button {
   font: inherit;
   color: inherit;
   cursor: pointer;
+  /* Without this, tapping + quickly twice makes iPhone zoom in instead */
+  touch-action: manipulation;
 }
 
 /* iOS zooms into inputs with text smaller than 16px, so never go below that */

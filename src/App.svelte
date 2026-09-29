@@ -4,6 +4,7 @@
   import WorkoutDays from './lib/WorkoutDays.svelte'
   import Library from './lib/Library.svelte'
   import History from './lib/History.svelte'
+  import UpdateToast from './lib/UpdateToast.svelte'
 
   // Which tab is showing at the bottom level
   let tab = $state('workouts') // 'workouts' | 'history' | 'exercises'
@@ -59,6 +60,8 @@
     <screen.component {...screen.props} />
   </div>
 {/each}
+
+<UpdateToast />
 
 <style>
   .tabs {

@@ -6,6 +6,7 @@
   import { startSession, activeSession } from './sessions.js'
   import { plural } from './format.js'
   import DayEditor from './DayEditor.svelte'
+  import InstallHint from './InstallHint.svelte'
   import LogWorkout from './LogWorkout.svelte'
 
   const nav = useNav()
@@ -39,6 +40,8 @@
   <h1>Workouts</h1>
   <button class="btn primary" onclick={newDay}>+ New</button>
 </header>
+
+<InstallHint />
 
 {#if $active}
   <button class="banner" onclick={() => nav.push(LogWorkout, { id: $active.id })}>
