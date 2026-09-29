@@ -3,9 +3,10 @@
   import { provideNav } from './lib/nav.js'
   import WorkoutDays from './lib/WorkoutDays.svelte'
   import Library from './lib/Library.svelte'
+  import History from './lib/History.svelte'
 
   // Which tab is showing at the bottom level
-  let tab = $state('workouts') // 'workouts' | 'exercises'
+  let tab = $state('workouts') // 'workouts' | 'history' | 'exercises'
 
   // Screens opened on top of the tabs, e.g. [DayEditor, ExercisePicker]. The last one is visible.
   // $state.raw: we replace the whole array on every change, so no deep tracking needed.
@@ -34,6 +35,8 @@
 <div class="tabs" hidden={stack.length > 0}>
   {#if tab === 'workouts'}
     <WorkoutDays />
+  {:else if tab === 'history'}
+    <History />
   {:else}
     <Library />
   {/if}
@@ -41,6 +44,9 @@
   <nav class="tabbar">
     <button class:active={tab === 'workouts'} onclick={() => (tab = 'workouts')}>
       <span class="icon">🏋️</span>Workouts
+    </button>
+    <button class:active={tab === 'history'} onclick={() => (tab = 'history')}>
+      <span class="icon">📅</span>History
     </button>
     <button class:active={tab === 'exercises'} onclick={() => (tab = 'exercises')}>
       <span class="icon">📚</span>Exercises

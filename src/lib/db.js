@@ -17,6 +17,13 @@ db.version(2).stores({
   workoutDays: '++id',
 })
 
+db.version(3).stores({
+  // One logged workout. See sessions.js for the full shape.
+  // "*exerciseIds" is a multi-entry index: it indexes every id in the array, so we can
+  // quickly find all sessions that included a given exercise ("what did I do last time?").
+  sessions: '++id, startedAt, *exerciseIds',
+})
+
 // ---- Exercises ----
 
 // Save an exercise to your library, including its GIF, so it works offline forever
