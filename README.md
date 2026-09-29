@@ -12,6 +12,10 @@ npm run build    # build the production site into dist/
 
 ## Deploy
 
-Cloudflare Pages builds automatically on every push to `main`:
-- Build command: `npm run build`
-- Output directory: `dist`
+Hosted on Cloudflare Workers (static assets) at https://gymrat.joseph0x45.com.
+
+```sh
+npm run deploy   # build + upload to Cloudflare (needs `npx wrangler login` once)
+```
+
+Config lives in `wrangler.jsonc`.
