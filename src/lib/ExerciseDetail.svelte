@@ -2,10 +2,14 @@
   // Full-screen view of one exercise: big GIF, muscles, equipment, instructions,
   // and a button to add it to (or remove it from) your library
   import { liveQuery } from 'dexie'
-  import { db, saveExercise, removeExercise } from './db.js'
+  import { db, saveExercise, removeExercise, workoutDaysUsing } from './db.js'
+  import { useNav } from './nav.js'
   import ExerciseGif from './ExerciseGif.svelte'
 
-  let { exercise, onclose } = $props()
+  let { exercise } = $props()
+
+  const nav = useNav()
+  const onclose = () => nav.pop()
 
   // The saved copy from the database: undefined = still checking, null = not saved
   const saved = liveQuery(async () => (await db.exercises.get(exercise.id)) ?? null)
@@ -26,7 +30,11 @@
   }
 
   async function remove() {
-    if (!confirm(`Remove "${exercise.name}" from your library?`)) return
+    const days = await workoutDaysUsing(exercise.id)
+    const message = days.length
+      ? `Remove "${exercise.name}"? It will also be removed from: ${days.map((d) => d.name || 'Untitled workout').join(', ')}.`
+      : `Remove "${exercise.name}" from your library?`
+    if (!confirm(message)) return
     await removeExercise(exercise.id)
   }
 </script>

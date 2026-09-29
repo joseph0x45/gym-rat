@@ -2,9 +2,14 @@
   // "My Exercises": everything you've saved to your library
   import { liveQuery } from 'dexie'
   import { db } from './db.js'
+  import { useNav } from './nav.js'
   import ExerciseRow from './ExerciseRow.svelte'
+  import AddExercise from './AddExercise.svelte'
+  import ExerciseDetail from './ExerciseDetail.svelte'
 
-  let { onadd, onopen } = $props()
+  const nav = useNav()
+  const onadd = () => nav.push(AddExercise)
+  const onopen = (exercise) => nav.push(ExerciseDetail, { exercise })
 
   // liveQuery re-runs automatically whenever the exercises table changes,
   // so the list updates by itself when you add or remove something.

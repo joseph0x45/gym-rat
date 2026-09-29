@@ -3,9 +3,13 @@
   import { liveQuery } from 'dexie'
   import { db } from './db.js'
   import { loadCatalog, searchExercises } from './exercisedb.js'
+  import { useNav } from './nav.js'
   import ExerciseRow from './ExerciseRow.svelte'
+  import ExerciseDetail from './ExerciseDetail.svelte'
 
-  let { onback, onopen } = $props()
+  const nav = useNav()
+  const onback = () => nav.pop()
+  const onopen = (exercise) => nav.push(ExerciseDetail, { exercise })
 
   // $state.raw: the catalog is big and never changes, so Svelte doesn't need
   // to track changes deep inside it (faster than plain $state)
