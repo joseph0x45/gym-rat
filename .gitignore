@@ -29,3 +29,6 @@ dist-ssr
 !.dev.vars.example
 .env*
 !.env.example
+
+# ExerciseDB data, downloaded by scripts/fetch-exercisedb.js
+public/exercisedb/
