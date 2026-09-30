@@ -7,6 +7,7 @@
   import { plural } from './format.js'
   import DayEditor from './DayEditor.svelte'
   import InstallHint from './InstallHint.svelte'
+  import Backup from './Backup.svelte'
   import LogWorkout from './LogWorkout.svelte'
 
   const nav = useNav()
@@ -38,6 +39,7 @@
 
 <header class="topbar">
   <h1>Workouts</h1>
+  <button class="btn" onclick={() => nav.push(Backup)} aria-label="Backup">💾</button>
   <button class="btn primary" onclick={newDay}>+ New</button>
 </header>
 
