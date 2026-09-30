@@ -8,6 +8,10 @@
   --muted: #9a9ba3;
   --accent: #ff7a3d;
   --danger: #ff5a5f;
+  /* Chart line color: a step darker than --accent so it sits in the dark-mode
+     lightness band (checked with a palette validator, not by eye) */
+  --chart-series: #e8662e;
+  --chart-grid: #2a2c31;
 
   color-scheme: dark;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;

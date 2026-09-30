@@ -5,6 +5,7 @@
   import { db, saveExercise, removeExercise, workoutDaysUsing } from './db.js'
   import { useNav } from './nav.js'
   import ExerciseGif from './ExerciseGif.svelte'
+  import ExerciseProgress from './ExerciseProgress.svelte'
 
   let { exercise } = $props()
 
@@ -56,6 +57,9 @@
       {#each exercise.secondary as muscle}<span class="chip cap">{muscle}</span>{/each}
     </div>
     <p class="muted cap">Equipment: {exercise.equipment.join(', ')}</p>
+
+    <!-- Only shows up once you've logged this exercise -->
+    <ExerciseProgress exerciseId={exercise.id} />
 
     <h3>How to do it</h3>
     <ol>

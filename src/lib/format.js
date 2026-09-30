@@ -28,5 +28,10 @@ export function formatDate(timestamp) {
   return new Date(timestamp).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' })
 }
 
+// -> "Sep 29" (for chart axes, where space is tight)
+export function formatShortDate(timestamp) {
+  return new Date(timestamp).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })
+}
+
 // "40×12 · 45×10" for a list of sets
 export const formatSets = (sets) => sets.map((s) => `${formatWeight(s.weight)}×${s.reps}`).join(' · ')

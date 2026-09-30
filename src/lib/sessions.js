@@ -88,6 +88,27 @@ export function finishSession(session) {
   })
 }
 
+// Every finished session that included this exercise, oldest first, with its best set
+// (heaviest weight; if tied, most reps). Used for the progress chart.
+export async function exerciseHistory(exerciseId) {
+  const sessions = await db.sessions
+    .where('exerciseIds')
+    .equals(exerciseId)
+    .filter((s) => s.finishedAt)
+    .sortBy('startedAt')
+
+  return sessions
+    .map((session) => {
+      const sets = session.entries.find((e) => e.exerciseId === exerciseId)?.sets ?? []
+      const best = sets.reduce(
+        (top, set) => (!top || set.weight > top.weight || (set.weight === top.weight && set.reps > top.reps) ? set : top),
+        null,
+      )
+      return { sessionId: session.id, date: session.startedAt, sets, best }
+    })
+    .filter((h) => h.best)
+}
+
 export function deleteSession(id) {
   return db.sessions.delete(id)
 }
